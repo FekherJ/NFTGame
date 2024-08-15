@@ -1,0 +1,15 @@
+=============== Aug 15, 2024 (CEST) ===============
+01:54:53.636469 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+01:54:53.657045 db@open opening
+01:54:53.905334 version@stat F·[] S·0B[] Sc·[]
+01:54:53.912245 db@janitor F·2 G·0
+01:54:53.912697 db@open done T·255.397741ms
+=============== Aug 15, 2024 (CEST) ===============
+14:20:43.475397 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+14:20:43.492636 version@stat F·[] S·0B[] Sc·[]
+14:20:43.493864 db@open opening
+14:20:43.497316 journal@recovery F·1
+14:20:45.530752 journal@recovery recovering @1
+14:20:48.856486 version@stat F·[] S·0B[] Sc·[]
+14:20:48.953378 db@janitor F·2 G·0
+14:20:48.959586 db@open done T·5.464252904s
