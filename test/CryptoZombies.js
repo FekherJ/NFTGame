@@ -16,10 +16,10 @@ contract("CryptoZombies", (accounts) => {
         contractInstance = await CryptoZombies.new();
     });
 	
-/*	afterEach(async () => {     //Truffle will call this function after the execution of each test
+	afterEach(async () => {     //Truffle will call this function after the execution of each test
         await contractInstance.kill();
     });
-*/	
+	
 	
 	//Define a test case for creating a new zombie
     it("should be able to create a new zombie", async () => {
