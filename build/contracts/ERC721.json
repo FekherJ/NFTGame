@@ -140,7 +140,7 @@
   "sourceMap": "",
   "deployedSourceMap": "",
   "source": "// SPDX-License-Identifier: UNLICENSED\n\npragma solidity ^0.8.21;\n\nabstract contract ERC721 {\n  event Transfer(address indexed _from, address indexed _to, uint256 indexed _tokenId);\n  event Approval(address indexed _owner, address indexed _approved, uint256 indexed _tokenId);\n\n  function balanceOf(address _owner) virtual external view returns (uint256);\n  function ownerOf(uint256 _tokenId) virtual external view returns (address);\n  function transferFrom(address _from, address _to, uint256 _tokenId) virtual external payable;\n  function approve(address _approved, uint256 _tokenId) virtual external payable;\n}\n",
-  "sourcePath": "D:\\Ethereum\\CryptoZombies LVL2\\repo\\contracts\\erc721.sol",
+  "sourcePath": "D:\\Ethereum\\CryptoZombies_LVL2\\repo\\contracts\\erc721.sol",
   "ast": {
     "absolutePath": "project:/contracts/erc721.sol",
     "exportedSymbols": {
@@ -762,7 +762,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-08-15T20:07:23.628Z",
+  "updatedAt": "2024-08-16T17:13:21.728Z",
   "devdoc": {
     "kind": "dev",
     "methods": {},

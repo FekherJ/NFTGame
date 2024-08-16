@@ -1,5 +1,11 @@
-const CryptoZombies = artifacts.require("CryptoZombies");  // Import the CryptoZombies contract artifact
+const CryptoZombies = artifacts.require("CryptoZombies");  // Import the CryptoZombies contract artifact (CryptoZombies.sol) which inherits from ZombieOwnership
 const utils = require("./helpers/utils");
+const time = require("./helpers/time");
+const { expect } = require('chai'); // you can also use should/assert
+// In NodeJS: import is only available in ES modules, not in commonJS modules 
+// in ES modules: import { assert } from 'chai';
+
+
 const zombieNames = ["Zombie 1", "Zombie 2"];	// Define an array of zombieNames for testing
 
 
@@ -16,9 +22,9 @@ contract("CryptoZombies", (accounts) => {
         contractInstance = await CryptoZombies.new();
     });
 	
-	afterEach(async () => {     //Truffle will call this function after the execution of each test
-        await contractInstance.kill();
-    });
+//	afterEach(async () => {     //Truffle will call this function after the execution of each test
+//        await contractInstance.kill();
+//    });
 	
 	
 	//Define a test case for creating a new zombie
@@ -43,20 +49,46 @@ contract("CryptoZombies", (accounts) => {
     })
 	
 	
-	xcontext("with the single-step transfer scenario", async () => {
+	context("with the single-step transfer scenario", async () => {
 		it("should transfer a zombie", async () => {
-		// TODO: Test the single-step transfer scenario.
+			const result = await contractInstance.createRandomZombie(zombieNames[0], {from: alice});	// Creating a random Zombie and making sure it's from Alice
+			const zombieId = result.logs[0].args.zombieId.toNumber();	
+			await contractInstance.transferFrom(alice,bob,zombieId,{from : alice});	// Transfering the created ERC721 token from alice to bob 
+			const newOwner = await contractInstance.ownerOf(zombieId);	
+			expect(newOwner).to.equal(bob);
         })
     })
+	
     
-	xcontext("with the two-step transfer scenario", async () => {
-		it("should approve and then transfer a zombie when the approved address calls transferFrom", async () => {
-            // TODO: Test the two-step scenario.  The approved address calls transferFrom
+	context("with the two-step transfer scenario", async () => {
+		 it("should approve and then transfer a zombie when the approved address calls transferFrom", async () => {
+            const result = await contractInstance.createRandomZombie(zombieNames[0], {from: alice});
+            const zombieId = result.logs[0].args.zombieId.toNumber();
+            await contractInstance.approve(bob,zombieId, {from : alice});
+            await contractInstance.transferFrom(alice, bob, zombieId, {from: bob});
+            const newOwner = await contractInstance.ownerOf(zombieId);
+            expect(newOwner).to.equal(bob);		// or assert.equal(newOwner,bob);
         })
+
         it("should approve and then transfer a zombie when the owner calls transferFrom", async () => {
-            // TODO: Test the two-step scenario.  The owner calls transferFrom
+            const result = await contractInstance.createRandomZombie(zombieNames[0], {from: alice});
+            const zombieId = result.logs[0].args.zombieId.toNumber();
+            await contractInstance.approve(bob, zombieId, {from: alice});
+            await contractInstance.transferFrom(alice, bob, zombieId, {from: alice});
+            const newOwner = await contractInstance.ownerOf(zombieId);
+            expect(newOwner).to.equal(bob);
         })
     })
 	
+		it("zombies should be able to attack another zombie", async () => {
+			let result;
+			result = await contractInstance.createRandomZombie(zombieNames[0], {from: alice});
+			const firstZombieId = result.logs[0].args.zombieId.toNumber();
+			result = await contractInstance.createRandomZombie(zombieNames[1], {from: bob});
+			const secondZombieId = result.logs[0].args.zombieId.toNumber();
+			await time.increase(time.duration.days(2));  // Increase the time by 1 day
+			await contractInstance.attack(firstZombieId, secondZombieId, {from: alice});
+			expect(result.receipt.status, true).to.equal(true);
 	
+		})
 })

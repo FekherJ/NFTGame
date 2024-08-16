@@ -1,7 +1,12 @@
 {
-  "dependencies": {
-    "loom-truffle-provider": "^0.13.0",
-    "node": "^22.6.0",
-    "truffle-hdwallet-provider": "^1.0.17"
-  }
+  	"dependencies": {
+  	  	"loom-truffle-provider": "^0.13.0",
+  	  	"node": "^22.6.0",
+  	  	"nvm": "^0.0.4",
+  	  	"truffle-hdwallet-provider": "^1.0.17",
+  	  	"web3": "^4.11.1"
+  	},
+  	"devDependencies": {
+  	  	"chai": "^4.5.0"
+  	}
 }
