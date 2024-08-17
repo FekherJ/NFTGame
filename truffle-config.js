@@ -24,13 +24,13 @@ module.exports = {
   networks: {
 	  
     // Configuration for mainnet
-		mainnet: {
-			provider: function () {
-				// Setting the provider with the Infura Mainnet address and Token
-				return new HDWalletProvider(mnemonic, "https://mainnet.infura.io/v3/YOUR_TOKEN")
-			},
-		network_id: "1"
+    mainnet: {
+		provider: function () {
+			// Setting the provider with the Infura Mainnet address and Token
+			return new HDWalletProvider(mnemonic, "https://mainnet.infura.io/v3/YOUR_TOKEN")
 		},
+		network_id: "1"
+	},
 		
     // Configuration for rinkeby network
     rinkeby: {
