@@ -29,14 +29,14 @@ module.exports = {
 	  
 	// COnfig of development network
 	development: {
-      host: "127.0.0.1",
-      port: 7545,
-      network_id: 5777
-	  //network_id: "*" // Match any network id
-    },
+      		host: "127.0.0.1",
+      		port: 7545,
+      		network_id: 5777
+	//network_id: "*" // Match any network id
+    	},
 	  
     // Configuration for mainnet
-    mainnet: {
+   	 mainnet: {
 		provider: function () {
 			// Setting the provider with the Infura Mainnet address and Token
 			return new HDWalletProvider(mnemonic, "https://mainnet.infura.io/v3/YOUR_TOKEN")
@@ -45,14 +45,14 @@ module.exports = {
 	},
 		
     // Configuration for rinkeby network
-    rinkeby: {
+    	rinkeby: {
 		// Special function to setup the provider
 		provider: function () {
 			// Setting the provider with the Infura Rinkeby address and Token
 			return new HDWalletProvider(mnemonic, "https://rinkeby.infura.io/v3/YOUR_TOKEN")
 		},
 		network_id: 4//Fill in the `network_id` for the Rinkeby network.
-    },
+    	},
 	
 	// Configuration for loom_testnet
 	loom_testnet: {
