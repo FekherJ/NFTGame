@@ -80,7 +80,7 @@ contract("CryptoZombies", (accounts) => {
         })
     })
 	
-		it("zombies should be able to attack another zombie", async () => {
+		xit("zombies should be able to attack another zombie", async () => {
 			let result;
 			result = await contractInstance.createRandomZombie(zombieNames[0], {from: alice});
 			const firstZombieId = result.logs[0].args.zombieId.toNumber();

@@ -7,14 +7,18 @@ const { readFileSync } = require('fs')
 const path = require('path')
 const { join } = require('path')
 
+// set directory
+const _dirname = "./"
+
 // Set your own mnemonic here
 const mnemonic = "ghost lemon scope fish paper small strain global";
 
 
 //Define a function that reads the private key from a file and initializes a new LoomTruffleProvider:
 function getLoomProviderWithPrivateKey (privateKeyPath, chainId, writeUrl, readUrl) {
-  const privateKey = readFileSync(privateKeyPath, 'utf-8');
-  return new LoomTruffleProvider(chainId, writeUrl, readUrl, privateKey);
+  //const privateKey = readFileSync(privateKeyPath, 'utf-8');	//Replaced by the following
+	privateKey = readFileSync(path.resolve(_dirname,"private_key.txt"), 'utf-8').trim();
+	return new LoomTruffleProvider(chainId, writeUrl, readUrl, privateKey);
 }
 
 
@@ -22,6 +26,14 @@ function getLoomProviderWithPrivateKey (privateKeyPath, chainId, writeUrl, readU
 module.exports = {
   // Object with configuration for each network
   networks: {
+	  
+	// COnfig of development network
+	development: {
+      host: "127.0.0.1",
+      port: 7545,
+      network_id: 5777
+	  //network_id: "*" // Match any network id
+    },
 	  
     // Configuration for mainnet
     mainnet: {
@@ -45,7 +57,7 @@ module.exports = {
 	// Configuration for loom_testnet
 	loom_testnet: {
 		provider: function() {
-			const privateKey = 'YOUR_PRIVATE_KEY'
+			const privateKey = readFileSync(path.resolve(_dirname,"testnet_private_key.txt"), 'utf-8').trim();
 			const chainId = 'extdev-plasma-us1';
 			const writeUrl = 'http://extdev-plasma-us1.dappchains.com:80/rpc';
 			const readUrl = 'http://extdev-plasma-us1.dappchains.com:80/query';
