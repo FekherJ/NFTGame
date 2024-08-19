@@ -27,7 +27,7 @@ module.exports = {
   // Object with configuration for each network
   networks: {
 	  
-	// COnfig of development network
+	// Config for truffle  development local network
 	development: {
       		host: "127.0.0.1",
       		port: 7545,
